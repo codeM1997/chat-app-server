@@ -4,6 +4,10 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'))
+app.get('/', (req, res) => {
+    res.sendFile('index.html', {root: path.join(__dirname, 'public')});
+  })
 const server = app.listen('3001', () => {
     console.log('Server running on port 3001....')
 })
@@ -25,3 +29,4 @@ io.on('connection', (socket) => {
         console.log('server disconnected')
     })
 })
+module.exports = app;
